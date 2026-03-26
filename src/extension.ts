@@ -32,8 +32,8 @@ class TimeTracker {
       vscode.StatusBarAlignment.Right,
       100
     );
-    this.statusBarItem.command = 'worthycode.showStats';
-    this.statusBarItem.tooltip = 'Click to view today\'s stats';
+    this.statusBarItem.command = 'worthycode.showDashboard';
+    this.statusBarItem.tooltip = 'Click to open dashboard';
     this.statusBarItem.show();
 
     this.checkDateChange();

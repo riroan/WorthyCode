@@ -38,32 +38,8 @@
     },
     "commands": [
       {
-        "command": "worthycode.showStats",
-        "title": "WorthyCode: Show Today's Stats"
-      },
-      {
-        "command": "worthycode.showFileStats",
-        "title": "WorthyCode: Show File Stats"
-      },
-      {
-        "command": "worthycode.showHistory",
-        "title": "WorthyCode: Show History (7 days)"
-      },
-      {
         "command": "worthycode.showDashboard",
         "title": "WorthyCode: Show Dashboard"
-      },
-      {
-        "command": "worthycode.setHourlyRate",
-        "title": "WorthyCode: Set Hourly Rate"
-      },
-      {
-        "command": "worthycode.setIdleTimeout",
-        "title": "WorthyCode: Set Idle Timeout"
-      },
-      {
-        "command": "worthycode.setCurrency",
-        "title": "WorthyCode: Set Currency"
       },
       {
         "command": "worthycode.resetToday",
