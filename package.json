@@ -9,6 +9,7 @@
     "url": "https://github.com/riroan/WorthyCode"
   },
   "icon": "images/icon.png",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
