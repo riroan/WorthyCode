@@ -33,7 +33,6 @@ class TimeTracker {
       100
     );
     this.statusBarItem.command = 'worthycode.showDashboard';
-    this.statusBarItem.tooltip = 'Click to open dashboard';
     this.statusBarItem.show();
 
     this.checkDateChange();
@@ -181,6 +180,18 @@ class TimeTracker {
     const icon = this.isTracking ? '$(credit-card)' : '$(debug-pause)';
 
     this.statusBarItem.text = `${icon} ${costStr} | $(clock) ${timeStr}`;
+
+    const fileCount = Object.keys(data.files).length;
+    const tooltip = new vscode.MarkdownString();
+    tooltip.isTrusted = true;
+    tooltip.supportThemeIcons = true;
+    tooltip.appendMarkdown(`### WorthyCode\n\n`);
+    tooltip.appendMarkdown(`| | |\n|---|---|\n`);
+    tooltip.appendMarkdown(`| $(credit-card) **Earnings** | ${costStr} |\n`);
+    tooltip.appendMarkdown(`| $(clock) **Time** | ${timeStr} |\n`);
+    tooltip.appendMarkdown(`| $(file) **Files** | ${fileCount} |\n\n`);
+    tooltip.appendMarkdown(`[Open Dashboard](command:worthycode.showDashboard)`);
+    this.statusBarItem.tooltip = tooltip;
   }
 
   private formatTime(ms: number): string {
