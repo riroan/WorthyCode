@@ -4,6 +4,11 @@
   "description": "Track your coding cost - convert dev time to money",
   "version": "0.1.0",
   "publisher": "riroan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riroan/WorthyCode"
+  },
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -20,7 +25,7 @@
         {
           "id": "worthycode",
           "title": "WorthyCode",
-          "icon": "$(credit-card)"
+          "icon": "images/sidebar-icon.svg"
         }
       ]
     },
@@ -55,7 +60,7 @@
       "properties": {
         "worthycode.hourlyRate": {
           "type": "number",
-          "default": 30000,
+          "default": 10,
           "description": "Hourly rate"
         },
         "worthycode.idleTimeout": {

@@ -262,6 +262,8 @@ class TimeTracker {
       { enableScripts: true }
     );
 
+    panel.iconPath = vscode.Uri.joinPath(this.context.extensionUri, 'images', 'icon.png');
+
     const updateDashboard = () => {
       const data = this.getTodayData();
       const history = this.getHistory();
@@ -663,8 +665,7 @@ class TimeTracker {
       height: 14px;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding-right: 4px;
+      justify-content: center;
     }
     .heatmap {
       display: flex;
@@ -772,12 +773,14 @@ class TimeTracker {
     .donut-legend-cost {
       font-size: 13px;
       color: #c4b5fd;
+      min-width: 100px;
+      text-align: right;
     }
     .donut-legend-percent {
       font-size: 12px;
       color: #666;
-      min-width: 45px;
-      text-align: right;
+      min-width: 50px;
+      text-align: left;
     }
     .tooltip {
       position: relative;
@@ -933,7 +936,7 @@ class TimeTracker {
   </div>
 
   <div class="card" style="margin-bottom: 24px;">
-    <h2>TOP 10 FILE TYPES</h2>
+    <h2>TOP 10 FILE EXTENSIONS</h2>
     ${extData.length === 0 ? `
       <div class="empty">
         <div class="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
