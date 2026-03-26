@@ -23,6 +23,7 @@ class TimeTracker {
   private isTracking: boolean = false;
   private idleTimer: NodeJS.Timeout | null = null;
   private updateTimer: NodeJS.Timeout | null = null;
+  private dashboardPanel: vscode.WebviewPanel | null = null;
   private context: vscode.ExtensionContext;
 
   constructor(context: vscode.ExtensionContext) {
@@ -42,7 +43,7 @@ class TimeTracker {
   private getConfig() {
     const config = vscode.workspace.getConfiguration('worthycode');
     return {
-      hourlyRate: config.get<number>('hourlyRate', 30000),
+      hourlyRate: config.get<number>('hourlyRate', 10),
       idleTimeout: config.get<number>('idleTimeout', 60) * 1000,
       currency: config.get<string>('currency', '$')
     };
@@ -255,6 +256,11 @@ class TimeTracker {
   }
 
   showDashboard() {
+    if (this.dashboardPanel) {
+      this.dashboardPanel.reveal();
+      return;
+    }
+
     const panel = vscode.window.createWebviewPanel(
       'worthycodeDashboard',
       'WorthyCode Dashboard',
@@ -262,6 +268,7 @@ class TimeTracker {
       { enableScripts: true }
     );
 
+    this.dashboardPanel = panel;
     panel.iconPath = vscode.Uri.joinPath(this.context.extensionUri, 'images', 'icon.png');
 
     const updateDashboard = () => {
@@ -325,7 +332,10 @@ class TimeTracker {
     updateDashboard();
 
     const interval = setInterval(updateDashboard, 1000);
-    panel.onDidDispose(() => clearInterval(interval));
+    panel.onDidDispose(() => {
+      clearInterval(interval);
+      this.dashboardPanel = null;
+    });
 
     panel.webview.onDidReceiveMessage(async (message) => {
       if (message.command === 'openFile') {
@@ -1165,7 +1175,7 @@ class SettingsProvider implements vscode.TreeDataProvider<SettingItem> {
 
   getChildren(): SettingItem[] {
     const config = vscode.workspace.getConfiguration('worthycode');
-    const hourlyRate = config.get<number>('hourlyRate', 30000);
+    const hourlyRate = config.get<number>('hourlyRate', 10);
     const idleTimeout = config.get<number>('idleTimeout', 60);
     const currency = config.get<string>('currency', '$');
 
@@ -1198,7 +1208,7 @@ class StatsProvider implements vscode.TreeDataProvider<StatsItem> {
   getChildren(): StatsItem[] {
     const config = vscode.workspace.getConfiguration('worthycode');
     const currency = config.get<string>('currency', '$');
-    const hourlyRate = config.get<number>('hourlyRate', 30000);
+    const hourlyRate = config.get<number>('hourlyRate', 10);
 
     const history = this.context.globalState.get<HistoryData>('history', {});
     const today = new Date().toISOString().split('T')[0];
@@ -1303,7 +1313,7 @@ export function activate(context: vscode.ExtensionContext) {
       { label: '€ (EUR)', value: '€' },
       { label: '£ (GBP)', value: '£' },
       { label: '¥ (JPY)', value: '¥' },
-      { label: '¥ (CNY)', value: '¥' }
+      { label: 'CN¥ (CNY)', value: 'CN¥' }
     ];
     const selected = await vscode.window.showQuickPick(currencies, {
       placeHolder: 'Select currency'
