@@ -313,6 +313,17 @@ class TimeTracker {
 
     const interval = setInterval(updateDashboard, 1000);
     panel.onDidDispose(() => clearInterval(interval));
+
+    panel.webview.onDidReceiveMessage(async (message) => {
+      if (message.command === 'openFile') {
+        try {
+          const doc = await vscode.workspace.openTextDocument(message.path);
+          await vscode.window.showTextDocument(doc);
+        } catch (e) {
+          vscode.window.showErrorMessage(`Cannot open file: ${message.path}`);
+        }
+      }
+    });
   }
 
   private getDashboardHtml(
@@ -398,17 +409,11 @@ class TimeTracker {
       font-weight: 700;
       letter-spacing: -1px;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-shadow: none;
-    }
-    .header h1 span {
-      background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
     .header .subtitle {
       font-size: 13px;
@@ -565,6 +570,7 @@ class TimeTracker {
       background: rgba(255,255,255,0.03);
       border-radius: 12px;
       transition: all 0.2s;
+      cursor: pointer;
     }
     .file-item:hover {
       background: rgba(255,255,255,0.08);
@@ -845,7 +851,7 @@ class TimeTracker {
 <body>
   <div class="header">
     <div class="subtitle">Developer Productivity</div>
-    <h1>Worthy<span>Code</span></h1>
+    <h1>WorthyCode</h1>
     <div class="date">${todayDate}</div>
   </div>
 
@@ -898,7 +904,7 @@ class TimeTracker {
       ` : `
         <div class="file-list">
           ${files.slice(0, 5).map((f) => `
-            <div class="file-item">
+            <div class="file-item" data-path="${f.path}" onclick="openFile(this)">
               <div class="file-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
               <div class="file-info">
                 <div class="file-name">${f.name}</div>
@@ -990,6 +996,15 @@ class TimeTracker {
       <span>More</span>
     </div>
   </div>
+  <script>
+    const vscode = acquireVsCodeApi();
+    function openFile(element) {
+      const path = element.getAttribute('data-path');
+      if (path) {
+        vscode.postMessage({ command: 'openFile', path: path });
+      }
+    }
+  </script>
 </body>
 </html>`;
   }
