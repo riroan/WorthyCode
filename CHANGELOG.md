@@ -8,10 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Auto time tracking with idle detection
 - Cost calculation based on hourly rate
-- Status bar display with real-time earnings and time
+- Status bar display with real-time worth and time
 - Hover tooltip with quick stats
 - Dashboard with:
-  - Today's Earnings
+  - Today's Worth
   - Weekly Overview (bar chart)
   - Top 5 Files (clickable to open)
   - Top 10 File Extensions (donut chart)

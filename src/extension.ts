@@ -188,7 +188,7 @@ class TimeTracker {
     tooltip.supportThemeIcons = true;
     tooltip.appendMarkdown(`### WorthyCode\n\n`);
     tooltip.appendMarkdown(`| | |\n|---|---|\n`);
-    tooltip.appendMarkdown(`| $(credit-card) **Earnings** | ${costStr} |\n`);
+    tooltip.appendMarkdown(`| $(credit-card) **Worth** | ${costStr} |\n`);
     tooltip.appendMarkdown(`| $(clock) **Time** | ${timeStr} |\n`);
     tooltip.appendMarkdown(`| $(file) **Files** | ${fileCount} |\n\n`);
     tooltip.appendMarkdown(`[Open Dashboard](command:worthycode.showDashboard)`);
@@ -222,7 +222,7 @@ class TimeTracker {
       `Today (${data.date})`,
       ``,
       `Work time: ${timeStr}`,
-      `Earned: ${costStr}`,
+      `Worth: ${costStr}`,
       ``,
       `Hourly rate: ${hourlyStr}/h`
     ];
@@ -880,7 +880,7 @@ class TimeTracker {
   </div>
 
   <div class="main-stat">
-    <div class="label">Today's Earnings</div>
+    <div class="label">Today's Worth</div>
     <div class="value">${formatCost(today.totalCost)}</div>
     <div class="sub"><span class="live"></span>${formatTime(today.totalTimeMs)} worked</div>
   </div>
@@ -1223,7 +1223,7 @@ class StatsProvider implements vscode.TreeDataProvider<StatsItem> {
 
     return [
       new StatsItem('Work Time', timeStr, 'clock'),
-      new StatsItem('Earned', `${currency}${data.totalCost.toLocaleString()}`, 'credit-card'),
+      new StatsItem('Worth', `${currency}${data.totalCost.toLocaleString()}`, 'credit-card'),
       new StatsItem('Files', `${fileCount} files`, 'file'),
       new StatsItem('Hourly Rate', `${currency}${hourlyRate.toLocaleString()}/h`, 'settings-gear')
     ];
@@ -1313,7 +1313,7 @@ export function activate(context: vscode.ExtensionContext) {
       { label: '€ (EUR)', value: '€' },
       { label: '£ (GBP)', value: '£' },
       { label: '¥ (JPY)', value: '¥' },
-      { label: 'CN¥ (CNY)', value: 'CN¥' }
+      { label: '¥ (CNY)', value: '¥' }
     ];
     const selected = await vscode.window.showQuickPick(currencies, {
       placeHolder: 'Select currency'

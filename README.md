@@ -1,12 +1,8 @@
 # WorthyCode
 
-![VS Code](https://img.shields.io/badge/VS%20Code-1.85+-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-0.1.0-orange)
+**Track the worth of your coding time.**
 
-**Track your coding time as money.**
-
-Ever wondered how much you earned while coding today? WorthyCode automatically tracks your development time and converts it to earnings based on your hourly rate.
+Ever wondered how much your coding time is worth? WorthyCode automatically tracks your development time and converts it to cost based on your hourly rate.
 
 ![Dashboard](images/dashboard.png)
 
@@ -15,12 +11,12 @@ Ever wondered how much you earned while coding today? WorthyCode automatically t
 ### Real-time Tracking
 
 - Automatic time tracking with smart idle detection
-- Status bar shows live earnings and time
+- Status bar shows live worth and time
 - Hover for quick stats preview
 
 ### Beautiful Dashboard
 
-- **Today's Earnings** - See your daily earnings at a glance
+- **Today's Worth** - See your daily worth at a glance
 - **Weekly Overview** - Bar chart of the past 7 days
 - **Top 5 Files** - Click to open most worked files
 - **File Extensions** - Donut chart breakdown by file type
@@ -57,7 +53,7 @@ Ever wondered how much you earned while coding today? WorthyCode automatically t
 
 ## Disclaimer
 
-This project does not actually pay you money. It is a productivity tool for visualizing your coding time as monetary value.
+This is a productivity tool for visualizing the worth of your coding time.
 
 ## Privacy
 
@@ -69,4 +65,4 @@ MIT
 
 ---
 
-**Enjoy coding and watch your earnings grow!**
+**Enjoy coding and track your productivity!**
