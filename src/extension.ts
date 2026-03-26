@@ -96,7 +96,7 @@ class TimeTracker {
   private getCurrentFile(): string {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
-      return vscode.workspace.asRelativePath(editor.document.uri);
+      return editor.document.uri.fsPath;
     }
     return '';
   }
