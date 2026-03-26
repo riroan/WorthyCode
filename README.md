@@ -1,5 +1,9 @@
 # WorthyCode
 
+![VS Code](https://img.shields.io/badge/VS%20Code-1.85+-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-0.1.0-orange)
+
 **Track your coding time as money.**
 
 Ever wondered how much you earned while coding today? WorthyCode automatically tracks your development time and converts it to earnings based on your hourly rate.
